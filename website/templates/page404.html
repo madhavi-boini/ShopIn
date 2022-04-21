@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="display-5 m-5 p-5 text-center text-danger">
+    <p>Oops! Page not found</p>
+</div>
+
+<div class="row text-center ">
+    <div class="col-3 display-6">
+    </div>
+    <div class="col-1 display-6">
+        <img src="https://media3.giphy.com/media/t6ncrIjaY9FVbrHv4v/giphy.gif?cid=6c09b952rmgkfgnkpehzi5s9vjjib4dsghwn1ur4watekyhz&rid=giphy.gif&ct=s" alt="404" height="300" width="300" >
+
+    </div>
+
+    <div class="col-5">
+        <p class="lead">We can't find the page you're looking for</p>
+        <br>
+        <button class="btn bg-primary "><a class="text-white" href="/">Back to home</a></button>
+    </div>
+    <div class="col-2 display-6">
+    </div>
+
+</div>
+
+{% endblock content %}

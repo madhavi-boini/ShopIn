@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block content %} {% load cart %}
+<div class="container mt-5 pt-4 pb-5 mb-4">
+  <div class="row p-2">
+    {% if not orders %} 
+  <p class="display-6 text-center">No Orders Placed</p>
+  {% endif %}  
+    {% for order in orders %}
+    <div class="card col-lg-6 mb-3" style="border: none">
+      <div class="card-header">
+        <b>{{order.product.title}}</b>
+      </div>
+      <div class="card-body">
+        <div class="row p-3">
+          <div class="col-8">
+            <i>{{order.product.desc}}</i>
+            <hr />
+            <p >Price -  ₹ {{order.product | price}} </p>
+            <p>Quantity - {{order.quantity}}</p>
+            <p>Date & Time - {{order.date}}</p>
+            <p>Delivery Address - {{order.address}}</p>
+            {% if order.status == "completed" %}
+            <div class="badge bg-success p-2" >Completed</div>
+            {% else %}
+            <div class="badge bg-warning p-2" >Pending</div>
+            {% endif %}
+            
+          </div>
+          <div class="col-4">
+            <img
+              class="float-right"
+              style="width: 17vh; border-radius: 10px"
+              src="/media/{{order.product.img}}"
+              alt="image"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="card-footer float-right">Total Price - ₹ {{order.price}}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

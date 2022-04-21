@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<div class="display-5 text-primary m-5 text-center p-5">
+Welcome Home
+</div>
+
+<div class="container">
+  <div class="row text-center">
+    <div class="col-sm-4  p-5">
+      <a  href="/clothes" >
+          <img  src="{% static 'img/clothes.jpg' %}"/></a>
+    </div>
+    <div class="col-sm-4 p-5">
+      <a  href="/jewellery"><img  src="{% static 'img/jewellery.jpg' %}"/></a>
+    </div>
+    <div class="col-sm-4 p-5">
+      <a href="/furniture" >
+          <img  src="{% static 'img/furniture.jpg' %}"/></a>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

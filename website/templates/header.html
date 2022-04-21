@@ -1,0 +1,64 @@
+      <nav class="navbar navbar-expand-sm navbar-light p-2 fixed-top bg-light">
+        <div class="container-fluid">
+          <i class="fa-brands fa-shopify"></i>
+          <a class="navbar-brand" href="/">ShopIn</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon "></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/clothes">Clothes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/furniture">Furniture</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/jewellery">Jewellery</a>
+              </li>
+             {% if request.session.customer %}
+             <li class="nav-item">
+              <a class="nav-link" href="/yourorders">YourOrders</a>
+            </li>
+
+             <li class="nav-item">
+              <div class="dropdown " style="border-radius: 15px;" >
+                <button onclick="myFunction()" class="dropbtn">Profile ▼
+                      
+                </button>
+                <div id="myDropdown" class="dropdown-content">
+                  <p class="text-primary">{{customer.firstname|upper}} {{customer.lastname|upper}}<p>
+                    <hr>
+                  <p>Eamil : {{customer.email}}<p>
+                  <p>Phone : {{customer.phone}}<p>
+                  <a class="bg-danger text-white text-center" href="/logout">LOGOUT</a>
+                  
+                </div>
+              </div>
+            </li>
+              
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link " href="/register">Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/login">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+            <div style="display: flex;justify-content: end;">
+              <div class="nav-item">
+                <a class="nav-link " href="/cart">
+                  <img style="width: 50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr9tEkFn5eeqjMivzEfiChgXrYUUpHCI2f8w&usqp=CAU" alt="">
+                  <span class="badge bg-secondary text-white">{{request.session.cart | length}}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+

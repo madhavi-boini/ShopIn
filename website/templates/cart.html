@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load  cart %}
+
+
+<div class="container pb-5 pt-5 mt-5">  
+  {% if not products %} 
+  <p class="display-6 text-center">Your Cart Is Empty</p>
+  {% endif %}     
+        <div class="container ">
+            <div class=" row p-2">
+              
+  {% for product in products %}
+  <div style="box-shadow: 2px 2px 5px black; border: none;" id="{{product.id}}" class=" card bg-light m-2 p-3">
+    <div class="row text-center ">
+        <div class="col-sm-4">
+            <img style="border-radius:10px ;" src="/media/{{product.img}}" alt="">
+        </div>
+    <div class="p-3 col-sm-8" >
+      <div>
+      <h5 >{{ product.title |upper}}</h5>
+      <br>
+      <p>{{ product.desc }}</p>
+      <p >Price - <strike>₹ {{ product.cost }}</strike> ₹ {{product | price}} </p>
+      <p >Discount - {{ product.discount }}%</p>
+
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-2">
+         <form  action="/cart/" method="post">
+       {% csrf_token %}
+     <input   hidden  type="text" value="{{product.id}}" name="product">
+     <input   hidden  type="text" value="True" name="remove">
+     <input type="submit" class="btn btn-secondary btn-block" value="-">
+   </form>
+ </div>
+ <div class="text-center col-8" >Quantity : {{product | product_quantity:request.session.cart}}</div>
+   <div class="col-2">
+     <form    action="/cart/#{{product.id}}" method="post">
+       {% csrf_token %}
+       <input   hidden  type="text" value="{{product.id}}" name="product">
+       <input type="submit" class="btn btn-secondary btn-block" value="+">
+     </form></div>
+    </div>
+    </div>
+  </div>
+  </div>
+  {% endfor %}
+  <p class="text-center mt-3 "><b>Total Cost : ₹  {{products | total_cost:request.session.cart}}</b></p>
+  {% if request.session.customer == None %}
+  <div class="text-center mt-3"><a class="text-white bg-secondary p-2" style="text-decoration: none; border-radius: 3px;" href="/login">Login to Place Order</a></div>
+  {% endif %}
+
+  {% if request.session.customer and  request.session.cart %}
+  <div class="text-center mt-3">
+    <form   action="/cart/" method="post">
+    {% csrf_token %}
+    <input   hidden  type="text" value="1" name="order">
+    <input type="text" name="address" placeholder="Address Line" minlength="20"  style="border: none; border-radius: 5px; width: 500px;"  class="bg-light p-2 m-2 " autocomplete="on" required>
+    <br>
+    <input type="submit" class="btn btn-secondary btn-block" value="Place Order">
+  </form>
+</div>
+  {% endif %}
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock content %}
